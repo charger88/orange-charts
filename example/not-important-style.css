@@ -1,0 +1,83 @@
+body {
+    background: #e2e2e2;
+    padding: 2rem 4rem;
+    font-family: sans-serif;
+}
+a {
+    color: #2e99e5;
+}
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+header > h1 {
+    font-family: 'Georgia', 'serif';
+    font-weight: bold;
+    margin: 0;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000, 1px 0 0 #000000, 0 1px 0 #000000, -1px 0 0 #000000, 0 -1px 0 #000000;
+}
+header > h1 > span {
+    color: #ffc919;
+}
+header > p {
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+section {
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 0;
+    margin: 0 auto;
+    max-width: 1300px;
+    background: #ffffff;
+    display: flex;
+}
+section:nth-child(odd) {
+    background: #f9f9f9;
+}
+section:last-child {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+section > .chart-container {
+    max-width: 768px;
+    width: 70%;
+}
+section > .chart-container > svg {
+    width: 100%;
+}
+section > .code-container {
+    width: 40%;
+    padding-right: 2rem;
+    box-sizing: border-box;
+}
+.code {
+    font-family: monospace;
+    white-space: pre;
+    overflow: scroll;
+    overflow-y: visible;
+}
+section > .chart-container .code {
+    max-height: 384px;
+    overflow-y: scroll;
+}
+div#details {
+    position: absolute;
+    z-index: 2;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    width: 8rem;
+    color: #ffffff;
+    font-size: 0.85rem;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.75);
+    margin: 1rem 0 0 1rem;
+    white-space: pre-line;
+}
+div#details:empty {
+    display: none;
+}

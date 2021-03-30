@@ -1,0 +1,36 @@
+{
+  "name": "orange-charts",
+  "version": "0.1.0",
+  "description": "Orange.Charts - simple light library for creating SVG (vector) charts both server-client and client-side",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charger88/orange-charts.git"
+  },
+  "keywords": [
+    "chart",
+    "graph",
+    "pie chart"
+  ],
+  "author": {
+    "name": "Michael Kelner",
+    "email": "mikhail.kelner@gmail.com",
+    "url": "https://www.michaelkelner.com/"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charger88/orange-charts/issues"
+  },
+  "homepage": "https://github.com/charger88/orange-charts#readme",
+  "dependencies": {
+    "orange-colors": "^1.0.1",
+    "orange-svg": "^0.1.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0"
+  }
+}

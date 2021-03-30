@@ -1,0 +1,445 @@
+<html>
+<head>
+    <script type="text/javascript" src="../dist/orange-charts.min.js"></script>
+    <script type="text/javascript" src="data/burgers-chains.js"></script>
+    <script type="text/javascript" src="data/elections-history.js"></script>
+    <script type="text/javascript" src="data/random-moments.js"></script>
+    <script type="text/javascript" src="data/sinus.js"></script>
+    <script type="text/javascript" src="data/elections.js"></script>
+    <link rel="stylesheet" type="text/css" href="not-important-style.css" />
+</head>
+<body>
+<header>
+    <h1><span>O</span>range.<span>C</span>harts</h1>
+    <p>Simple light library for creating SVG (vector) charts both server-client and client-side</p>
+    <p><a href="https://github.com/charger88/orange-charts">github.com/charger88/orange-charts</a></p>
+</header>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+        "label": true,
+        "source": "year"
+    })
+    .axis("y", {
+        "cumulative": true,
+        "min": 0,
+        "lines": true,
+        "label": v => `${v / 1000000}M`,
+        "max": 160000000
+    })
+    .render("bars_chart_cumulative", {
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="bars_chart_cumulative"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+        "label": true,
+        "source": "year"
+    })
+    .axis("y", {
+        "cumulative": false,
+        "min": 0,
+        "lines": true,
+        "label": true,
+        "max": 100000000
+    })
+    .render("bars_chart", {
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="bars_chart"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartHorizontalBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+        "min": 0,
+        "lines": true,
+        "label": v => `${Math.round(v / 1000000)}M`,
+    })
+    .axis("y", {
+        "label": true,
+        "source": "year"
+    })
+    .render("horizontal_bars_chart", {
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="horizontal_bars_chart"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartDots(data_elections))
+    .assignSource("pc_trump", "#ff1a1a")
+    .assignSource("pc_biden", "#2e4de5")
+    .assignSource("pc_others", "grey")
+    .axis("x", {
+        "lines": true,
+        "source": "gpb_pc2018",
+        "label": true,
+        "min": 30000,
+        "max": 70000,
+        "dynamic": true
+    })
+    .axis("y", {
+        "lines": true,
+        "source": "pc_trump",
+        "label": true,
+        "min": 0,
+        "max": 100
+    })
+    .render("dots_chart", {
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="dots_chart"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartPie(data_burgers))
+    .assignSource("locations", {
+        "property": "name",
+        "mapping": {
+            "Burger King": "#f5ebdc",
+            "Whataburger": "#ff770f",
+            "McDonald's": "#ffcc00",
+            "Wendy's": "#dd1438",
+            "Jack in the Box": "#e51837"
+        }
+    })
+    .setDataCallback("mouseover", (_, data) => {
+        let details = document.getElementById('details');
+        if (!details) {
+            details = document.createElement('div');
+            details.setAttribute('id', 'details')
+            document.body.appendChild(details);
+        }
+        details.innerText = `${data.label}: ${data.value} restaurants`;
+    })
+    .setDataCallback("mousemove", (e) => {
+        const details = document.getElementById('details');
+        details.style.top = `${e.pageY}px`;
+        details.style.left = `${e.pageX}px`;
+    })
+    .setDataCallback("mouseleave", () => {
+        document.getElementById('details').innerText = '';
+    })
+    .render("pie_chart", {
+        "label": 5,
+        "diameter": 384,
+        "fair": false
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="pie_chart"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartLines(data_random_moments))
+    .assignSource("value", "#ffc919")
+    .axis("x", {
+        "lines": true,
+        "label": true,
+        "source": "moment",
+        "dynamic": true
+    })
+    .axis("y", {
+        "lines": true,
+        "label": true
+    })
+    .render("lines_chart_dynamic_data", {
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="lines_chart_dynamic_data"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartLines(data_sinus))
+    .assignSource("y_sin", "#ffc919")
+    .assignSource("y_cos", "#2e99e5")
+    .axis("x", {
+        "lines": true,
+        "source": "x",
+        "label": true,
+        "dynamic": true
+    })
+    .axis("y", {
+        "lines": true,
+        "label": true,
+        "min": -1.5,
+        "max": 1.5
+    })
+    .render("lines_chart_two_lines", {
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container" id="lines_chart_two_lines"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+(new OrangeChartLines(data_sinus))
+    .assignSource("y_sin", "#ffc919")
+    .assignSource("y_cos", "#2e99e5")
+    .axis("x", {
+        "lines": true,
+        "source": "x",
+        "label": true,
+        "dynamic": true
+    })
+    .axis("y", {
+        "lines": true,
+        "label": true,
+        "min": -1.5,
+        "max": 1.5
+    })
+    .render("lines_chart_with_area", {
+        "width": 768,
+        "height": 384,
+        "area": ["y_sin", "y_cos"]
+    })
+        </div>
+    </div>
+    <div class="chart-container" id="lines_chart_with_area"></div>
+</section>
+<section>
+    <div class="code-container">
+        <div class="code">
+document.getElementById("bars_chart_code").innerText = (new OrangeChartBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+        "label": true,
+        "source": "year"
+    })
+    .toString({
+        "width": 768,
+        "height": 384
+    });
+        </div>
+    </div>
+    <div class="chart-container"><div class="code" id="bars_chart_code"></div></div>
+</section>
+
+
+<script type="text/javascript">
+
+  if (!window.hasOwnProperty('OrangeChartPie')) alert('Run "npm run build" to generate static version of the library to use in this example');
+
+  (new OrangeChartPie(data_burgers))
+    .assignSource("locations", {
+      "property": "name",
+      "mapping": {
+        "Burger King": "#f5ebdc",
+        "Whataburger": "#ff770f",
+        "McDonald's": "#ffcc00",
+        "Wendy's": "#dd1438",
+        "Jack in the Box": "#e51837"
+      }
+    })
+    .setDataCallback("mouseover", (_, data) => {
+      let details = document.getElementById('details');
+      if (!details) {
+        details = document.createElement('div');
+        details.setAttribute('id', 'details')
+        document.body.appendChild(details);
+      }
+      details.innerText = `${data.label}: ${data.value} restaurants`;
+    })
+    .setDataCallback("mousemove", (e) => {
+      const details = document.getElementById('details');
+      details.style.top = `${e.pageY}px`;
+      details.style.left = `${e.pageX}px`;
+    })
+    .setDataCallback("mouseleave", () => {
+      document.getElementById('details').innerText = '';
+    })
+    .render("pie_chart", {
+      "label": 5,
+      "diameter": 384,
+      "fair": false
+    });
+
+  (new OrangeChartBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+      "label": true,
+      "source": "year"
+    })
+    .axis("y", {
+      "cumulative": false,
+      "min": 0,
+      "lines": true,
+      "label": true,
+      "max": 100000000
+    })
+    .render("bars_chart", {
+      "width": 768,
+      "height": 384
+    });
+
+  (new OrangeChartBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+      "label": true,
+      "source": "year"
+    })
+    .axis("y", {
+      "cumulative": true,
+      "min": 0,
+      "lines": true,
+      "label": v => `${v / 1000000}M`,
+      "max": 160000000
+    })
+    .render("bars_chart_cumulative", {
+      "width": 768,
+      "height": 384
+    });
+
+  (new OrangeChartHorizontalBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+      "min": 0,
+      "lines": true,
+      "label": v => `${Math.round(v / 1000000)}M`,
+    })
+    .axis("y", {
+      "label": true,
+      "source": "year"
+    })
+    .render("horizontal_bars_chart", {
+      "width": 768,
+      "height": 384
+    });
+
+  (new OrangeChartLines(data_sinus))
+    .assignSource("y_sin", "#ffc919")
+    .assignSource("y_cos", "#2e99e5")
+    .axis("x", {
+      "lines": true,
+      "source": "x",
+      "label": true,
+      "dynamic": true
+    })
+    .axis("y", {
+      "lines": true,
+      "label": true,
+      "min": -1.5,
+      "max": 1.5
+    })
+    .render("lines_chart_two_lines", {
+      "width": 768,
+      "height": 384
+    });
+
+  (new OrangeChartLines(data_random_moments))
+    .assignSource("value", "#ffc919")
+    .axis("x", {
+      "lines": true,
+      "label": true,
+      "source": "moment",
+      "dynamic": true
+    })
+    .axis("y", {
+      "lines": true,
+      "label": true
+    })
+    .render("lines_chart_dynamic_data", {
+      "width": 768,
+      "height": 384
+    });
+
+  (new OrangeChartDots(data_elections))
+    .assignSource("pc_trump", "#ff1a1a")
+    .assignSource("pc_biden", "#2e4de5")
+    .assignSource("pc_others", "grey")
+    .axis("x", {
+      "lines": true,
+      "source": "gpb_pc2018",
+      "label": true,
+      "min": 30000,
+      "max": 70000,
+      "dynamic": true
+    })
+    .axis("y", {
+      "lines": true,
+      "source": "pc_trump",
+      "label": true,
+      "min": 0,
+      "max": 100
+    })
+    .render("dots_chart", {
+      "width": 768,
+      "height": 384
+    });
+
+  (new OrangeChartLines(data_sinus))
+    .assignSource("y_sin", "#ffc919")
+    .assignSource("y_cos", "#2e99e5")
+    .axis("x", {
+      "lines": true,
+      "source": "x",
+      "label": true,
+      "dynamic": true
+    })
+    .axis("y", {
+      "lines": true,
+      "label": true,
+      "min": -1.5,
+      "max": 1.5
+    })
+    .render("lines_chart_with_area", {
+      "width": 768,
+      "height": 384,
+      "area": ["y_sin", "y_cos"]
+    })
+
+  document.getElementById("bars_chart_code").innerText = (new OrangeChartBars(data_elections_history_popular_vote))
+    .assignSource("republicans", "#ff1a1a")
+    .assignSource("democrats", "#2e4de5")
+    .axis("x", {
+      "label": true,
+      "source": "year"
+    })
+    .toString({
+      "width": 768,
+      "height": 384
+    });
+
+</script>
+</body>
+</html>
