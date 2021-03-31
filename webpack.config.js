@@ -10,6 +10,6 @@ module.exports = {
     minimize: false
   },
   output: {
-    filename: 'orange-charts.min.js',
+    filename: 'orange-charts.js',
   }
 };

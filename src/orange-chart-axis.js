@@ -195,7 +195,9 @@ class OrangeChartAxis {
    * @private
    */
   static _p (min, max, n) {
-    return Math.round(Math.log((max - min) / (n - 1)) / Math.log(10)) * -1
+    if (min === max) return -1;
+    const p = Math.round(Math.log((max - min) / (n - 1)) / Math.log(10)) * -1
+    return Math.min(p, 99);
   }
 
   /**
@@ -223,7 +225,7 @@ class OrangeChartAxis {
     const length = is_vertical ? (x2 - x1) : (y2 - y1)
     const margin = size / (n - 1)
     let position, label_text
-    const p = (scale.min !== null) && (scale.max !== null) ? this.constructor._p(scale.min, scale.max, n) : null
+    const p = (scale.min !== null) && (scale.max !== null) ? this.constructor._p(scale.min, scale.max, n) : -1
     const show_every_n = n > 21 ? Math.floor((n - 1) / 10) : 1
     for (let i = 0; i < n; i++) {
       if (i % show_every_n) continue

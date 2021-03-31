@@ -3,6 +3,11 @@ const {OrangeSVGPolyline, OrangeSVGPolygon, OrangeSVGCircle} = require('orange-s
 
 class OrangeChartLines extends OrangeChartAbstractGrid {
 
+  constructor (data) {
+    if (data.length < 2) throw new Error('You can\'t create lines chart with only one object in the data array')
+    super(data)
+  }
+
   /**
    *
    * @param {OrangeSVG} svg

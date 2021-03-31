@@ -13,6 +13,7 @@ class OrangeChartAbstract {
    * @param {object[]} data Array of data rows
    */
   constructor (data) {
+    if (data.length < 1) throw new Error('Data array is empty')
     this._data = data
     this._source_mapping = []
     this._default_data_callbacks = {}
