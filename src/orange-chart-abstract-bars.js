@@ -99,18 +99,19 @@ class OrangeChartAbstractBars extends OrangeChartAbstract {
           'value': row[bar.property]
         }
         bar_length = (row[bar.property] - real_scale.min) / (real_scale.max - real_scale.min) * (is_vertical ? height : width)
+        const unfair_adjustment = real_axis.cumulative && !fair && j && row_cumulative_value ? Math.min(row_cumulative_value, height * 0.0075) : 0;
         const rectangle = is_vertical
           ? (new OrangeSVGRect(
             (rd.margin + rd.bar_size) * i + (real_axis.cumulative ? 0 : bar_section_length * j) + (rd.side_margin_adjustment > 0 ? rd.margin : 0) + x1,
             height - bar_length - row_cumulative_value + y1,
             bar_section_length,
-            bar_length + (real_axis.cumulative && !fair && j ? height * 0.0075 : 0),
+            bar_length + unfair_adjustment,
             bar.color
           ))
           : (new OrangeSVGRect(
             row_cumulative_value + x1,
             (rd.margin + rd.bar_size) * i + (real_axis.cumulative ? 0 : bar_section_length * j) + (rd.side_margin_adjustment > 0 ? rd.margin : 0) + y1,
-            bar_length + (real_axis.cumulative && !fair && j ? height * 0.0075 : 0),
+            bar_length + unfair_adjustment,
             bar_section_length,
             bar.color
           ))
