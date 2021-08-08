@@ -92,7 +92,7 @@ Config is supposed to be an object with these possible properties. Some values m
 | `min` | `number` | minimal value of the axis |
 | `max` | `number` | maximal value of the axis |
 
-### `view`: OrangeChartAbstract.render(*, view),  OrangeChartAbstract.toString(view)
+### `view`: OrangeChartAbstract.render(*, view), OrangeChartAbstract.toString(view)
 
 This config defines some configuration for chart's rendering. Certain properties can be uses for certain chart types.
 
@@ -114,3 +114,7 @@ This config defines some configuration for chart's rendering. Certain properties
 | `max_radius` | `number` | Maximal dot radius (dynamic mode) | `OrangeChartDots`, `OrangeChartLines` |
 | `area` | `boolean` | Defines if area below the line should be filled with the color | `OrangeChartLines` |
 | `area_opacity` | `number` | Defines opacity of the area below the line | `OrangeChartLines` |
+| `average_lines` | `object` | Enables lines with average line per property | `OrangeChartDots`, `OrangeChartLines`, `OrangeChartBars`, `OrangeChartHorizontalBars` |
+| `average_lines:key` | `string` | Data property name |  |
+| `average_lines:value` | `string` | Line for data property line's color |  |
+| `all_average_line` | `boolean` or `string` | Enables line with average line (all properties); defines line's color | `OrangeChartDots`, `OrangeChartLines`, `OrangeChartBars`, `OrangeChartHorizontalBars` |

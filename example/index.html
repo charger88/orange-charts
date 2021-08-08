@@ -200,7 +200,12 @@
     })
     .render("lines_chart_two_lines", {
         "width": 768,
-        "height": 384
+        "height": 384,
+        "average_lines": {
+            "y_sin": "#ffe799",
+            "y_cos": "#a1c9e5"
+        },
+        "all_average_line": "#9df2a5"
     });
         </div>
     </div>
@@ -363,7 +368,12 @@ document.getElementById("bars_chart_code").innerText = (new OrangeChartBars(data
     })
     .render("lines_chart_two_lines", {
       "width": 768,
-      "height": 384
+      "height": 384,
+      "average_lines": {
+        "y_sin": "#ffe799",
+        "y_cos": "#a1c9e5"
+      },
+      "all_average_line": "#9df2a5"
     });
 
   (new OrangeChartLines(data_random_moments))

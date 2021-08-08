@@ -1,6 +1,6 @@
 {
   "name": "orange-charts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Orange.Charts - simple light library for creating SVG (vector) charts both server-client and client-side",
   "main": "index.js",
   "scripts": {

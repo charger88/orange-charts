@@ -1,6 +1,6 @@
-const OrangeChartAbstract = require('./orange-chart-abstract')
+const OrangeChartAbstractXY = require('./orange-chart-abstract-x-y')
 
-class OrangeChartAbstractGrid extends OrangeChartAbstract {
+class OrangeChartAbstractGrid extends OrangeChartAbstractXY {
 
   /**
    * Chart type
@@ -58,6 +58,7 @@ class OrangeChartAbstractGrid extends OrangeChartAbstract {
    * @protected
    */
   _do_render (svg, view, x1, y1, x2, y2) {
+    super._do_render(svg, view, x1, y1, x2, y2)
 
     const width = x2 - x1
     const height = y2 - y1

@@ -1,7 +1,7 @@
 const {OrangeSVGRect} = require('orange-svg')
-const OrangeChartAbstract = require('./orange-chart-abstract')
+const OrangeChartAbstractXY = require('./orange-chart-abstract-x-y')
 
-class OrangeChartAbstractBars extends OrangeChartAbstract {
+class OrangeChartAbstractBars extends OrangeChartAbstractXY {
 
   /**
    * Chart type
@@ -19,6 +19,14 @@ class OrangeChartAbstractBars extends OrangeChartAbstract {
    */
   get chart_sub_type_code () {
     throw new Error('OrangeChartAbstractBars.chart_sub_type_code should be overridden')
+  }
+
+  /**
+   * Returns chart elements positioning mode
+   * @return boolean
+   */
+  get _is_vertical () {
+    return this.chart_sub_type_code === 'vertical'
   }
 
   /**
@@ -41,8 +49,8 @@ class OrangeChartAbstractBars extends OrangeChartAbstract {
   _get_basic_dimensions (view) {
     const bar_size = view.hasOwnProperty('bar_size') ? view.bar_size : 60
     const margin = view.hasOwnProperty('margin') ? view.margin : 20
-    const width = view.hasOwnProperty('width') ? view.width : (this.chart_sub_type_code === 'horizontal' ? (this._data.length * (margin + bar_size) + margin) : 500)
-    const height = view.hasOwnProperty('height') ? view.height : (this.chart_sub_type_code === 'vertical' ? (this._data.length * (margin + bar_size) + margin) : 200)
+    const width = view.hasOwnProperty('width') ? view.width : (!this._is_vertical ? (this._data.length * (margin + bar_size) + margin) : 500)
+    const height = view.hasOwnProperty('height') ? view.height : (this._is_vertical ? (this._data.length * (margin + bar_size) + margin) : 200)
     return {width, height}
   }
 
@@ -76,10 +84,10 @@ class OrangeChartAbstractBars extends OrangeChartAbstract {
    * @protected
    */
   _do_render (svg, view, x1, y1, x2, y2) {
+    super._do_render(svg, view, x1, y1, x2, y2)
     const width = x2 - x1
     const height = y2 - y1
-    const is_vertical = this.chart_sub_type_code === 'vertical'
-    const real_axis = is_vertical ? this._axes.y : this._axes.x
+    const real_axis = this._is_vertical ? this._axes.y : this._axes.x
     const rd = this._calculate_data_for_render(this.chart_sub_type_code === 'vertical' ? width : height, view, real_axis._config.label)
     const fair = view.hasOwnProperty('fair') ? view.fair : false
     let bar_length, row_cumulative_value
@@ -98,9 +106,9 @@ class OrangeChartAbstractBars extends OrangeChartAbstract {
           'property': bar.property,
           'value': row[bar.property]
         }
-        bar_length = (row[bar.property] - real_scale.min) / (real_scale.max - real_scale.min) * (is_vertical ? height : width)
+        bar_length = (row[bar.property] - real_scale.min) / (real_scale.max - real_scale.min) * (this._is_vertical ? height : width)
         const unfair_adjustment = real_axis.cumulative && !fair && j && row_cumulative_value ? Math.min(row_cumulative_value, height * 0.0075) : 0;
-        const rectangle = is_vertical
+        const rectangle = this._is_vertical
           ? (new OrangeSVGRect(
             (rd.margin + rd.bar_size) * i + (real_axis.cumulative ? 0 : bar_section_length * j) + (rd.side_margin_adjustment > 0 ? rd.margin : 0) + x1,
             height - bar_length - row_cumulative_value + y1,
