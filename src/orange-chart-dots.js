@@ -26,10 +26,10 @@ class OrangeChartDots extends OrangeChartAbstractGrid {
   _do_render_elements (svg, data, color, property, view, _) {
     const callbacks = this.getCallbacks(property)
     let i = 0
-    for (const [x, y, radius] of data) {
+      for (const [x, y, radius, row] of data) {
       const circle = new OrangeSVGCircle(x, y, radius, color)
       circle.args = {'data-property': property || '', 'class': 'orange-chart-dots-dot'}
-      svg.appendChild(circle, callbacks, {property, 'value': {'x': this._data[i][this._axes['x'].source], 'y': this._data[i][property]}})
+      svg.appendChild(circle, callbacks, {property, row, 'value': {'x': this._data[i][this._axes['x'].source], 'y': this._data[i][property]}})
       ++i
     }
   }

@@ -35,10 +35,10 @@ class OrangeChartLines extends OrangeChartAbstractGrid {
     }
     if (view.hasOwnProperty('dots') && (view.dots === true || view.dots.includes(property))) {
       let i = 0
-      for (const [x, y] of data) {
+      for (const [x, y, _, row] of data) {
         const circle = new OrangeSVGCircle(x, y, view.hasOwnProperty('radius') ? view.radius : 2, color)
         circle.args = {'data-property': property, 'class': 'orange-chart-lines-dot'}
-        svg.appendChild(circle, callbacks, {property, 'value': {'x': this._data[i][this._axes['x'].source], 'y': this._data[i][property]}})
+        svg.appendChild(circle, callbacks, {property, row, 'value': {'x': this._data[i][this._axes['x'].source], 'y': this._data[i][property]}})
         ++i
       }
     }

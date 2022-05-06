@@ -100,7 +100,8 @@ class OrangeChartAbstractGrid extends OrangeChartAbstractXY {
         elements.push([
           position_w,
           position_h,
-          radius || base_radius || null
+          radius || base_radius || null,
+          row
         ])
       }
       this._do_render_elements(svg, elements, line.hasOwnProperty('color') ? line.color : null, line.property, view, {x1, y1, x2, y2})
