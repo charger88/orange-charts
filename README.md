@@ -67,6 +67,20 @@ Methods and properties of this class appear in any type of chart.
 * `OrangeChartLines` - lines chart
 * `OrangeChartPie` - pie chart
 
+#### Special functionality
+
+##### `OrangeChartDots`
+
+You can define function to calculate color of dots:
+
+```
+...
+    .assignSource("param", row => {
+        return Math.random() >= 0.5 ? '#00ff00' : '#ff0000'
+    })
+...
+```
+
 ### Other classes
 
 They can be used for extending this library.
@@ -111,7 +125,10 @@ This config defines some configuration for chart's rendering. Certain properties
 | `dots` | `boolean` | Defines if dots should be rendered on the chart's line | `OrangeChartLines` |
 | `min_radius` | `number` | Minimal dot radius (dynamic mode) | `OrangeChartDots`, `OrangeChartLines` |
 | `max_radius` | `number` | Maximal dot radius (dynamic mode) | `OrangeChartDots`, `OrangeChartLines` |
-| `max_radius` | `number` | Maximal dot radius (dynamic mode) | `OrangeChartDots`, `OrangeChartLines` |
+| `median_line` | `number` | Provide value (number of chunks to split data) to show line based on median value of data chunk | `OrangeChartDots`, `OrangeChartLines` |
+| `median_line_color` | `string` | Defines color of median values line | `OrangeChartDots` |
+| `average_line` | `number` | Provide value (number of chunks to split data) to show line based on average value of data chunk | `OrangeChartDots`, `OrangeChartLines` |
+| `average_line_color` | `string` | Defines color of average values line | `OrangeChartDots` |
 | `area` | `boolean` | Defines if area below the line should be filled with the color | `OrangeChartLines` |
 | `area_opacity` | `number` | Defines opacity of the area below the line | `OrangeChartLines` |
 | `average_lines` | `object` | Enables lines with average line per property | `OrangeChartDots`, `OrangeChartLines`, `OrangeChartBars`, `OrangeChartHorizontalBars` |
