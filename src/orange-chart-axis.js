@@ -243,9 +243,20 @@ class OrangeChartAxis {
         svg.appendChild(line)
       }
       if (this._config.label) {
-        label_text = this._config.dynamic
-          ? (lt => (p + 1) > 0 ? lt.toFixed(p + 1) : Math.round(lt).toString())((scale.max - scale.min) * (is_vertical ? (1 - i / (n - 1)) : i / (n - 1)) + scale.min)
-          : this._data[i][this._config.sources[0]]
+        let label_text
+        if (this._config.dynamic) {
+          const format_function = (lt => (p + 1) > 0 ? lt.toFixed(p + 1) : Math.round(lt).toString())
+          const range = scale.max - scale.min
+          let v
+          if (this._config.log) {
+            v = i ? range * Math.log(range * i / (n - 1)) / Math.log(range) : 0
+          } else {
+            v = range * i / (n - 1)
+          }
+          label_text = format_function((is_vertical ? (range - v) : v) + scale.min)
+        } else {
+          label_text = this._data[i][this._config.sources[0]]
+        }
         this.constructor._addLabel(
           svg,
           typeof this._config.label === 'function' ? this._config.label(label_text) : label_text,

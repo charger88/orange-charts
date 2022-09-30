@@ -94,7 +94,12 @@ class OrangeChartAbstractGrid extends OrangeChartAbstractXY {
         } else {
           h_position_property = line.property
         }
-        position_h = height - (row[h_position_property] - y_scale.min) / (y_scale.max - y_scale.min) * height
+        const h_value_v = row[h_position_property] - y_scale.min
+        const h_value_r = y_scale.max - y_scale.min
+        const h_value = this._axes.y._config.dynamic && this._axes.y._config.log
+          ? (h_value_v ? Math.log(h_value_v) / Math.log(h_value_r) : 0)
+          : (h_value_v / h_value_r)
+        position_h = height - h_value * height
         position_w += x1
         position_h += y1
         elements.push([

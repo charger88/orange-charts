@@ -135,3 +135,20 @@ This config defines some configuration for chart's rendering. Certain properties
 | `average_lines:key` | `string` | Data property name |  |
 | `average_lines:value` | `string` | Line for data property line's color |  |
 | `all_average_line` | `boolean` or `string` | Enables line with average line (all properties); defines line's color | `OrangeChartDots`, `OrangeChartLines`, `OrangeChartBars`, `OrangeChartHorizontalBars` |
+
+## Logarithmic chart
+
+For some charts, such as `OrangeChartLines` and `OrangeChartDots`, you can define logarithmic mode.
+
+To do so, it should by in dynamic mode for Y axis (works that way by default for `Y` axis in such charts) and provide `log: true` option:
+
+```
+    ...
+    .axis("y", {
+      "label": true,
+      "log": true
+    })
+    ...
+```
+
+Please, pay attention that right now "average lines" functionality doesn't work correctly with logarithmic mode.
