@@ -138,7 +138,7 @@ This config defines some configuration for chart's rendering. Certain properties
 
 ## Logarithmic chart
 
-For some charts, such as `OrangeChartLines` and `OrangeChartDots`, you can define logarithmic mode.
+For some charts, such as `OrangeChartBars`, `OrangeChartLines` and `OrangeChartDots`, you can define logarithmic mode.
 
 To do so, it should by in dynamic mode for Y axis (works that way by default for `Y` axis in such charts) and provide `log: true` option:
 

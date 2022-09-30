@@ -106,7 +106,12 @@ class OrangeChartAbstractBars extends OrangeChartAbstractXY {
           'property': bar.property,
           'value': row[bar.property]
         }
-        bar_length = (row[bar.property] - real_scale.min) / (real_scale.max - real_scale.min) * (this._is_vertical ? height : width)
+        const rsv = row[bar.property] - real_scale.min
+        const rss = real_scale.max - real_scale.min
+        bar_length = this._axes.y._config.dynamic && this._axes.y._config.log
+          ? (rsv ? (Math.log(rsv) / Math.log(rss)) : 0) 
+          : (rsv / rss)
+        bar_length =  bar_length * (this._is_vertical ? height : width)
         const unfair_adjustment = real_axis.cumulative && !fair && j && row_cumulative_value ? Math.min(row_cumulative_value, height * 0.0075) : 0;
         const rectangle = this._is_vertical
           ? (new OrangeSVGRect(

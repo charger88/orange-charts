@@ -248,12 +248,17 @@ class OrangeChartAxis {
           const format_function = (lt => (p + 1) > 0 ? lt.toFixed(p + 1) : Math.round(lt).toString())
           const range = scale.max - scale.min
           let v
+          const real_n = n - 1
           if (this._config.log) {
-            v = i ? range * Math.log(range * i / (n - 1)) / Math.log(range) : 0
+            if (is_vertical) {
+              v = real_n !== i ? Math.pow(Math.E, (real_n - i) / real_n * Math.log(range) ) : 0
+            } else {
+              v = i ? Math.pow(Math.E, i / real_n * Math.log(range) ) : 0
+            }
           } else {
-            v = range * i / (n - 1)
+            v = (is_vertical ? (real_n - i) : i) / real_n * range
           }
-          label_text = format_function((is_vertical ? (range - v) : v) + scale.min)
+          label_text = format_function(v + scale.min)
         } else {
           label_text = this._data[i][this._config.sources[0]]
         }
