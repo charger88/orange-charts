@@ -99,10 +99,11 @@ class OrangeChartAxis {
     const default_margin = view.hasOwnProperty('default_margin') ? view.default_margin : 10
     if (this._config.label) {
       if (this.axis === 'x') {
+        const y2m = this._config.title ? 6 : 3
         return {
           'x1': 4 * default_margin,
           'x2': 4 * default_margin,
-          'y2': 3 * default_margin
+          'y2': y2m * default_margin
         }
       } else if (this.axis === 'y') {
         return {
@@ -270,6 +271,19 @@ class OrangeChartAxis {
           is_vertical ? 'end' : 'middle'
         )
       }
+    }
+    if (this._config.title) {
+      let text
+      if (this.axis === 'x') {
+        text = new OrangeSVGText(this._config.title, x1 + (x2 - x1) / 2, y2 + 5 * default_margin, 'middle')
+        text.args = {'class': 'orange-chart-axis-title'}
+      } else {
+        const ax = x1 - 6 * default_margin
+        const ay = y1 + (y2 - y1) / 2
+        text = new OrangeSVGText(this._config.title, ax, ay, 'middle')
+        text.args = {'class': 'orange-chart-axis-title', 'transform': `rotate(-90 ${ax},${ay})`}
+      }
+      svg.appendChild(text)
     }
   }
 

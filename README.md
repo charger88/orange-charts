@@ -23,7 +23,8 @@ const data_elections_history_popular_vote = [
     .assignSource("democrats", "#2e4de5") // Assign second source (columns will be blue) - property "democrats" from the data set
     .axis("x", { // Description of X axis
         "label": true, // Show label for X axis values
-        "source": "year" // "year" property will be used as data for X axis
+        "title": "Elections year", // Title of the axis
+        "source": "year" // "year" property will be used as data for X axis,
     })
     .axis("y", { // Description of Y axis
         "min": 0, // Minimal value (without definition it would be calculated automatically

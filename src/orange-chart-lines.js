@@ -29,7 +29,7 @@ class OrangeChartLines extends OrangeChartAbstractGrid {
       svg.appendChild(line)
     }
     if (area_opacity !== null) {
-      const polygon = new OrangeSVGPolygon(data.concat([[data[data.length - 1][0], position.y2], [data[0][0], position.y2]]), color, area_opacity)
+      const polygon = new OrangeSVGPolygon(data.map(v => v.slice(0, 2)).concat([[data[data.length - 1][0], position.y2], [data[0][0], position.y2]]), color, area_opacity)
       polygon.args = {'data-property': property, 'class': 'orange-chart-lines-area'}
       svg.appendChild(polygon)
     }
