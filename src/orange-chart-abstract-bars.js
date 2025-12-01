@@ -104,7 +104,8 @@ class OrangeChartAbstractBars extends OrangeChartAbstractXY {
         const callbacks = this.getCallbacks(bar.property)
         const callback_data = {
           'property': bar.property,
-          'value': row[bar.property]
+          'value': row[bar.property],
+          row,
         }
         const rsv = row[bar.property] - real_scale.min
         const rss = real_scale.max - real_scale.min
