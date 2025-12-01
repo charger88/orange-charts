@@ -259,7 +259,10 @@ class OrangeChartAxis {
           } else {
             v = (is_vertical ? (real_n - i) : i) / real_n * range
           }
-          label_text = format_function(v + scale.min)
+          label_text = v + scale.min
+          if (this._config.label !== 'function') {
+            label_text = format_function(label_text)
+          }
         } else {
           label_text = this._data[i][this._config.sources[0]]
         }
