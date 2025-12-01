@@ -136,6 +136,7 @@ This config defines some configuration for chart's rendering. Certain properties
 | `average_lines:key` | `string` | Data property name |  |
 | `average_lines:value` | `string` | Line for data property line's color |  |
 | `all_average_line` | `boolean` or `string` | Enables line with average line (all properties); defines line's color | `OrangeChartDots`, `OrangeChartLines`, `OrangeChartBars`, `OrangeChartHorizontalBars` |
+| `max_bar_color` | `string` | Defines the color to use for columns which go above the defined `max` value | `OrangeChartBars`, `OrangeChartHorizontalBars` |
 
 ## Logarithmic chart
 

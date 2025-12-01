@@ -113,20 +113,24 @@ class OrangeChartAbstractBars extends OrangeChartAbstractXY {
           : (rsv / rss)
         bar_length =  bar_length * (this._is_vertical ? height : width)
         const unfair_adjustment = real_axis.cumulative && !fair && j && row_cumulative_value ? Math.min(row_cumulative_value, height * 0.0075) : 0;
+        let color = bar.color
+        if (real_axis._config.hasOwnProperty('max') && (row[bar.property] > real_axis._config.max) && view.max_bar_color) {
+          color = view.max_bar_color
+        } 
         const rectangle = this._is_vertical
           ? (new OrangeSVGRect(
             (rd.margin + rd.bar_size) * i + (real_axis.cumulative ? 0 : bar_section_length * j) + (rd.side_margin_adjustment > 0 ? rd.margin : 0) + x1,
             height - bar_length - row_cumulative_value + y1,
             bar_section_length,
             bar_length + unfair_adjustment,
-            bar.color
+            color
           ))
           : (new OrangeSVGRect(
             row_cumulative_value + x1,
             (rd.margin + rd.bar_size) * i + (real_axis.cumulative ? 0 : bar_section_length * j) + (rd.side_margin_adjustment > 0 ? rd.margin : 0) + y1,
             bar_length + unfair_adjustment,
             bar_section_length,
-            bar.color
+            color
           ))
         rectangle.args = {'data-property': bar.property, 'class': `orange-chart-bars-bar, orange-chart-bars-bar-${this.chart_sub_type_code}`}
         svg.appendChild(rectangle, callbacks, callback_data)
